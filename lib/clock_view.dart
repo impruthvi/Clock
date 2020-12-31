@@ -38,6 +38,8 @@ class ClockPainter extends CustomPainter {
   // 1 sec -- 6 degree
   @override
   void paint(Canvas canvas, Size size) {
+
+    
     var centerX = size.width / 2;
     var centerY = size.height / 2;
     var center = Offset(centerX, centerY);
