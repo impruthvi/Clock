@@ -26,18 +26,10 @@ class _HomePageState extends State<HomePage> {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              FlatButton(
-                onPressed: null,
-                child: Column(
-                  children: <Widget>[
-                    FlutterLogo(),
-                    Text(
-                      "Clock",
-                      style: TextStyle(color: Colors.white, fontSize: 14),
-                    ),
-                  ],
-                ),
-              )
+              buildMenuButton("Clock", "clock_icon.png"),
+              buildMenuButton("Alarm", "alarm_icon.png"),
+              buildMenuButton("Timer", "timer_icon.png"),
+              buildMenuButton("StopWatch", "stopwatch_icon.png"),
             ],
           ),
           VerticalDivider(
@@ -45,30 +37,31 @@ class _HomePageState extends State<HomePage> {
             width: 1,
           ),
           Expanded(
-                      child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 32,vertical: 64),
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 60, horizontal: 10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     "Clock",
-                    style: TextStyle(color: Colors.white, fontSize: 24),
+                    style: TextStyle(fontFamily: "avenir",color: Colors.white, fontSize: 24),
                   ),
                   SizedBox(
                     height: 32,
                   ),
                   Text(
                     formattedTime,
-                    style: TextStyle(color: Colors.white, fontSize: 64),
+                    style: TextStyle(fontFamily: "avenir",color: Colors.white, fontSize: 64),
                   ),
                   Text(
                     formattedDate,
-                    style: TextStyle(color: Colors.white, fontSize: 20),
+                    style: TextStyle(fontFamily: "avenir",color: Colors.white, fontSize: 20),
                   ),
                   ClockView(),
+                  SizedBox(height: 20),
                   Text(
                     "TimeZone",
-                    style: TextStyle(color: Colors.white, fontSize: 24),
+                    style: TextStyle(fontFamily: "avenir",color: Colors.white, fontSize: 24),
                   ),
                   SizedBox(
                     height: 16,
@@ -93,6 +86,29 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Padding buildMenuButton(String title, String image) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 16),
+      child: FlatButton(
+        onPressed: null,
+        child: Column(
+          children: <Widget>[
+            Image.asset("assets/" + image,scale: 1.5,),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              title,
+              style: TextStyle(fontFamily: "avenir",color: Colors.white, fontSize: 14),
+            ),
+        
+            
+          ],
+        ),
       ),
     );
   }
