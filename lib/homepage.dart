@@ -38,48 +38,104 @@ class _HomePageState extends State<HomePage> {
           ),
           Expanded(
             child: Container(
-              padding: EdgeInsets.symmetric(vertical: 60, horizontal: 10),
+              padding: EdgeInsets.symmetric(vertical: 60, horizontal: 30),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "Clock",
-                    style: TextStyle(fontFamily: "avenir",color: Colors.white, fontSize: 24),
+                  Flexible(
+                    flex: 1,
+                    fit: FlexFit.tight,
+                    child: Text(
+                      "Clock",
+                      style: TextStyle(
+                          fontFamily: "avenir",
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white,
+                          fontSize: 24),
+                    ),
                   ),
-                  SizedBox(
-                    height: 32,
+
+
+                  Flexible(
+                    flex: 2,
+                    fit: FlexFit.tight,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          formattedTime,
+                          style: TextStyle(
+                              fontFamily: "avenir",
+                              fontWeight: FontWeight.w300,
+                              color: Colors.white,
+                              fontSize: 64),
+                        ),
+                        Text(
+                          formattedDate,
+                          style: TextStyle(
+                              fontFamily: "avenir",
+                              fontWeight: FontWeight.w200,
+                              color: Colors.white,
+                              fontSize: 20),
+                        ),
+                      ],
+                    ),
                   ),
-                  Text(
-                    formattedTime,
-                    style: TextStyle(fontFamily: "avenir",color: Colors.white, fontSize: 64),
-                  ),
-                  Text(
-                    formattedDate,
-                    style: TextStyle(fontFamily: "avenir",color: Colors.white, fontSize: 20),
-                  ),
-                  ClockView(),
-                  SizedBox(height: 20),
-                  Text(
-                    "TimeZone",
-                    style: TextStyle(fontFamily: "avenir",color: Colors.white, fontSize: 24),
-                  ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Icon(
-                        Icons.language,
-                        color: Colors.white,
+
+
+
+                  Flexible(
+                    flex: 5,
+                    fit: FlexFit.tight,
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: ClockView(
+                        size: MediaQuery.of(context).size.height / 3.5,
                       ),
-                      SizedBox(
-                        width: 16,
-                      ),
-                      Text(
-                        "UTC" + offsetSign + timezoneString,
-                        style: TextStyle(color: Colors.white, fontSize: 14),
-                      ),
-                    ],
+                    ),
+                  ),
+
+
+                  SizedBox(height:30),
+                  Flexible(
+                    flex: 2,
+                    fit: FlexFit.tight,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Flexible(
+                          child: Text(
+                            "TimeZone",
+                            style: TextStyle(
+                                fontFamily: "avenir",
+                                fontWeight: FontWeight.w400,
+                                color: Colors.white,
+                                fontSize: 24),
+                          ),
+                        ),
+                        SizedBox(height:16),
+                        Row(
+                          children: <Widget>[
+                            Icon(
+                              Icons.language,
+                              color: Colors.white,
+                            ),
+                            SizedBox(
+                              width: 8,
+                            ),
+                            Text(
+                              "UTC" + offsetSign + timezoneString,
+                              style: TextStyle(
+                                fontFamily: "avenir",
+                                color: Colors.white,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w300,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -97,16 +153,18 @@ class _HomePageState extends State<HomePage> {
         onPressed: null,
         child: Column(
           children: <Widget>[
-            Image.asset("assets/" + image,scale: 1.5,),
+            Image.asset(
+              "assets/" + image,
+              scale: 1.5,
+            ),
             SizedBox(
               height: 10,
             ),
             Text(
               title,
-              style: TextStyle(fontFamily: "avenir",color: Colors.white, fontSize: 14),
+              style: TextStyle(
+                  fontFamily: "avenir", color: Colors.white, fontSize: 14),
             ),
-        
-            
           ],
         ),
       ),
