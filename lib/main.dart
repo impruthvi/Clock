@@ -1,6 +1,8 @@
-
+import 'package:clock_app/menu_info.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import 'enums.dart';
 import 'homepage.dart';
 
 void main() {
@@ -12,12 +14,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-     
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomePage(),
+      home: ChangeNotifierProvider<MenuInfo>(
+        create: (context) =>MenuInfo(MenuType.clock),
+        child: HomePage(),
+      ),
     );
   }
 }
