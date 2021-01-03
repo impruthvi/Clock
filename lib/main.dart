@@ -1,9 +1,9 @@
-import 'package:clock_app/menu_info.dart';
+import 'package:clock_app/models/menu_info.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'enums.dart';
-import 'homepage.dart';
+import 'views/homepage.dart';
 
 void main() {
   runApp(MyApp());

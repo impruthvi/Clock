@@ -5,7 +5,7 @@ class MenuInfo extends ChangeNotifier {
   MenuType menuType;
   String title;
   String imageSource;
-
+  
   MenuInfo(this.menuType, {this.imageSource, this.title});
 
   updateMenu(MenuInfo menuInfo) {
