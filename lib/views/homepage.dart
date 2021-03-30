@@ -1,14 +1,11 @@
-import 'package:clock_app/views/clock_page.dart';
-
 import 'package:clock_app/constants/theme_data.dart';
 import 'package:clock_app/data.dart';
 import 'package:clock_app/enums.dart';
 import 'package:clock_app/models/menu_info.dart';
+import 'package:clock_app/views/alarm_page.dart';
+import 'package:clock_app/views/clock_page.dart';
 import 'package:flutter/material.dart';
-
 import 'package:provider/provider.dart';
-
-import 'alarm_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -19,61 +16,76 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF2D2F41),
+      backgroundColor: CustomColors.pageBackgroundColor,
       body: Row(
-        children: [
+        children: <Widget>[
           Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: menuItems
-                  .map((currentmenuInfo) => buildMenuButton(currentmenuInfo))
-                  .toList()),
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: menuItems
+                .map((currentMenuInfo) => buildMenuButton(currentMenuInfo))
+                .toList(),
+          ),
           VerticalDivider(
-            color: Colors.white54,
+            color: CustomColors.dividerColor,
             width: 1,
           ),
           Expanded(
             child: Consumer<MenuInfo>(
-                builder: (BuildContext context, value, Widget child) {
-              if (value.menuType == MenuType.clock) {
-                return ClockPage();
-              } else if (value.menuType == MenuType.alarm) {
-                return AlarmPage();
-              }
-            }),
+              builder: (BuildContext context, MenuInfo value, Widget child) {
+                if (value.menuType == MenuType.clock)
+                  return ClockPage();
+                else if (value.menuType == MenuType.alarm)
+                  return AlarmPage();
+                else
+                  return Container(
+                    child: RichText(
+                      text: TextSpan(
+                        style: TextStyle(fontSize: 20),
+                        children: <TextSpan>[
+                          TextSpan(text: 'Upcoming Tutorial\n'),
+                          TextSpan(
+                            text: value.title,
+                            style: TextStyle(fontSize: 48),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+              },
+            ),
           ),
         ],
       ),
     );
   }
 
-  Widget buildMenuButton(MenuInfo currentmenuInfo) {
+  Widget buildMenuButton(MenuInfo currentMenuInfo) {
     return Consumer<MenuInfo>(
-      builder: (BuildContext context, value, Widget child) {
+      builder: (BuildContext context, MenuInfo value, Widget child) {
         return FlatButton(
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.only(topRight: Radius.circular(32))),
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          color: currentmenuInfo.menuType == value.menuType
+          padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 0),
+          color: currentMenuInfo.menuType == value.menuType
               ? CustomColors.menuBackgroundColor
               : Colors.transparent,
           onPressed: () {
             var menuInfo = Provider.of<MenuInfo>(context, listen: false);
-
-            menuInfo.updateMenu(currentmenuInfo);
+            menuInfo.updateMenu(currentMenuInfo);
           },
           child: Column(
             children: <Widget>[
               Image.asset(
-                currentmenuInfo.imageSource,
+                currentMenuInfo.imageSource,
                 scale: 1.5,
               ),
-              SizedBox(
-                height: 10,
-              ),
+              SizedBox(height: 16),
               Text(
-                currentmenuInfo.title,
+                currentMenuInfo.title ?? '',
                 style: TextStyle(
-                    fontFamily: "avenir", color: Colors.white, fontSize: 14),
+                    fontFamily: 'avenir',
+                    color: CustomColors.primaryTextColor,
+                    fontSize: 14),
               ),
             ],
           ),
